@@ -1,0 +1,27 @@
+{
+    "name": "ffterm",
+    "type": "module",
+    "version": "0.1.1",
+    "description": "Tiny terminal util",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dungeonkim/ffterm.git"
+    },
+    "author": "Kim, Donggun",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/dungeonkim/ffterm/issues"
+    },
+    "homepage": "https://github.com/dungeonkim/ffterm#readme",
+    "dependencies": {
+        "boxen": "^7.1.1",
+        "chalk": "^5.3.0",
+        "cli-table3": "^0.6.4",
+        "ora": "^8.0.1",
+        "prompts": "^2.4.2"
+    }
+}
