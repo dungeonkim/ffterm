@@ -5,6 +5,7 @@ import ora,{ oraPromise } from 'ora';
 import chalk from 'chalk';
 import boxen from 'boxen';
 import Table from 'cli-table3';
+import ProgressBar from 'progress';
 
 const ffterm = {};
 
@@ -97,11 +98,12 @@ ffterm.line = function(lineChar) {
 
 /**
  * 테이블 스트링 만들기
+ * ex) [[{content:'a',rowSpan:2,hAlign:'center'},'b','c']]
+ * 첫줄은 해더로 다른 색으로 표시된다.
+ * https://github.com/cli-table/cli-table3/blob/master/advanced-usage.md
  * 폭 정하기
  * ex) options = colWidths: [10, 10, 10]
  * data 항목은 object로 해서 옵션을 줄 수 있음
- * ex) [{content:'a',rowSpan:2,hAlign:'center'},'b','c']
- * https://github.com/cli-table/cli-table3/blob/master/advanced-usage.md
  *
  * @param {*} data
  * @param {object} [options]
@@ -114,6 +116,28 @@ ffterm.table = function(data, options) {
     }));
     table.push(...data.slice(1));
     return table.toString();
+}
+
+/**
+ * 
+ * 프로그래스바 생성하기
+ * ex)
+ * const bar = ffterm.progressBar({message:'Downloading',total:100});
+ * bar.tick(10);
+ * @param {*} options
+ * @return {ProgressBar} 
+ * 
+ */
+ffterm.progressBar = function (options) {
+    options ??= { message:''};
+    let format = `${options.message} :bar :percent :etas`;
+    let barOptions = {
+        complete: '\u001b[42m \u001b[0m',
+        incomplete: '\u001b[41m \u001b[0m',
+        width: 40,
+        total: options.total ?? 100
+    };
+    return new ProgressBar(format, barOptions);
 }
 
 
