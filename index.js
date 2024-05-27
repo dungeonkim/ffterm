@@ -54,8 +54,12 @@ ffterm.run = function(command, options) {
 
 ffterm.prompt = prompts.prompt;
 
+ffterm.log = function( msg, isSuccess = true) {
+    console.log((isSuccess ? chalk.green('√ ') : chalk.red('× '))+msg);
+}
+
 /**
- *
+ * Yes/No 질문을 묻고 대답을 받는다.
  *
  * @param {string} msg
  * @param {boolean} defaultIsYes
@@ -74,6 +78,15 @@ ffterm.spinner = ora;
 ffterm.spinnerPromise = oraPromise;
 ffterm.color = chalk;
 ffterm.box = boxen;
+
+
+  
+/**
+ * 배너를 출력한다.
+ *
+ * @param {*} title
+ * @param {*} options
+ */
 ffterm.banner = function(title, options) {
     options = Object.assign({
         padding: {left:2,right:2,top:0,bottom:0},
@@ -91,6 +104,13 @@ ffterm.getHeight = function() {
     return process.stdout.rows;
 }
 
+
+
+/**
+ * 가로줄을 삽입한다.
+ *
+ * @param {*} lineChar
+ */
 ffterm.line = function(lineChar) {
     lineChar ??= '─';
     console.log(lineChar.repeat(ffterm.getWidth()/lineChar.length));
@@ -142,5 +162,4 @@ ffterm.progressBar = function (options) {
 
 
 export default ffterm;
-
 
