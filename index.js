@@ -69,7 +69,7 @@ ffterm.confirm = function(msg,defaultIsYes = false) {
     return new Promise(async (resolve, reject) => {
         let result = await prompts.prompt({
             type: 'confirm',
-            name: msg,
+            name: 'confirm',
             message: msg,
             initial: defaultIsYes ?? true
         });
