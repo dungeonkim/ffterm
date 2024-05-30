@@ -65,13 +65,16 @@ ffterm.log = function( msg, isSuccess = true) {
  * @param {boolean} defaultIsYes
  * @return {Promise<boolean>} 
  */
-ffterm.confirm = async function(msg,defaultIsYes = false) {
-    return await prompts.prompt({
-        type: 'confirm',
-        name: msg,
-        message: msg,
-        initial: defaultIsYes ?? true
-    }).confirm;
+ffterm.confirm = function(msg,defaultIsYes = false) {
+    return new Promise(async (resolve, reject) => {
+        let result = await prompts.prompt({
+            type: 'confirm',
+            name: msg,
+            message: msg,
+            initial: defaultIsYes ?? true
+        });
+        resolve(result.confirm);
+    });
 }
 
 ffterm.spinner = ora;
